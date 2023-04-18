@@ -12,7 +12,7 @@ const updateUI = (data) => {
     //destructure properties
 
     const {cityDets, weather } = data; //from data object get cityDates and store it in const of same name, same with weather
-    console.log(weather)
+    console.log(cityDets, weather)
     //update details template
 
     details.innerHTML = `
@@ -52,15 +52,18 @@ const updateCity  = async (city) => {
 }
 
 cityForm.addEventListener("submit", e => {
-    e.preventDefault();
 
     //get city value
     //store city here
     const city = cityForm.city.value.trim(); //name for input field is defined so we can simply call city property
-    cityForm.reset();           //trim to remove whitespace
-
+    cityForm.reset();                        //trim to remove whitespace
+    //set local storage
+    localStorage.setItem("city", city); //always rewrites depending on what was last entered
+})
     //update UI with new city by calling async function directly inside
-    updateCity(city)
-        .then(data => updateUI(data))
-        .catch(err => console.log(err));
-})                                    
+    if(localStorage.getItem("city")) { //runs only if city exists
+    updateCity(localStorage.getItem("city"))
+    .then(data => updateUI(data))
+    .catch(err => console.log(err))
+
+}
