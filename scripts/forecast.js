@@ -1,9 +1,9 @@
-const key = "PKXP4FJwBVrmVWkB1Gn8G6GAUcA5u8er" //API KEY
+const key = "fR031e5ZWfbkbYjNTBBqUG6UcspJEAg8" //API KEY
 
 const getWeather = async (cityID) => {
 
     const base = "http://dataservice.accuweather.com/currentconditions/v1/"
-    const query = `${cityID}?apikey=${key}&language=hr-HR"`
+    const query = `${cityID}?apikey=${key}&language=hr-HR&details=true`
 
     const response = await fetch(base + query);
     const data = await response.json();
